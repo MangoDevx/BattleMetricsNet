@@ -2,7 +2,15 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <Authors>MangoDevX</Authors>
+        <Description>Wrapper for battlemetrics.com</Description>
+        <PackageProjectUrl>https://github.com/MangoDevx/BattleMetricsNet</PackageProjectUrl>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/MangoDevx/BattleMetricsNet</RepositoryUrl>
+        <PackageTags>Battlemetrics BattleMetrics Wrapper BattleMetricsNet</PackageTags>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
+    
 
     <ItemGroup>
       <Compile Remove="WrapperTests\**" />
@@ -17,6 +25,10 @@
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="LICENSE.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>
