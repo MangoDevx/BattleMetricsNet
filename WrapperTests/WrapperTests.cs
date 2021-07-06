@@ -21,6 +21,8 @@ namespace WrapperTests
         public async Task BeginTests()
         {
             await TestServerInfos();
+            Console.WriteLine("\n");
+            await TestGameInfo();
         }
         
         private async Task TestServerInfos()
@@ -34,6 +36,21 @@ namespace WrapperTests
             var minecraftServerInfo = await _bmClient.GetServerInfoAsync<MinecraftInfo>("5873087");
             Console.WriteLine($"Name: {minecraftServerInfo.Data.Attributes.Name} | Active PLayers: {minecraftServerInfo.Data.Attributes.Players} | Clean desc: " +
                               $"{minecraftServerInfo.Data.Attributes.Details.MinecraftCleanDescription.Replace("\n", " ")}");
+        }
+
+        private async Task TestGameInfo()
+        {
+            var minecraftGameInfo = await _bmClient.GetGameInfoAsync("minecraft");
+            Console.WriteLine($"Name: {minecraftGameInfo.Data.Attributes.Name} | Max players 24H: {minecraftGameInfo.Data.Attributes.MaxPlayers24H} | " +
+                              $"Players online currently in the USA: {minecraftGameInfo.Data.Attributes.PlayersByCountry.Us}");
+
+            var rustGameInfo = await _bmClient.GetGameInfoAsync("rust");
+            Console.WriteLine($"Name: {rustGameInfo.Data.Attributes.Name} | Max players 24H: {rustGameInfo.Data.Attributes.MaxPlayers24H} | " +
+                              $"Players online currently in the USA: {rustGameInfo.Data.Attributes.PlayersByCountry.Us}");
+            
+            var arkGameInfo = await _bmClient.GetGameInfoAsync("ark");
+            Console.WriteLine($"Name: {arkGameInfo.Data.Attributes.Name} | Max players 24H: {arkGameInfo.Data.Attributes.MaxPlayers24H} | " +
+                              $"Players online currently in the USA: {arkGameInfo.Data.Attributes.PlayersByCountry.Us}");
         }
     }
 }

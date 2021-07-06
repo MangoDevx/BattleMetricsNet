@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BattlemetricsWrapper.Interfaces;
+using BattlemetricsWrapper.ResponseModels;
 using Newtonsoft.Json;
 
 namespace BattlemetricsWrapper
@@ -25,13 +27,17 @@ namespace BattlemetricsWrapper
 
         public async Task<T> GetServerInfo<T>(string serverId) where T : IServerInfo => await Get<T>("servers", serverId);
 
+        public async Task<GameInfo> GetGameInfo(string gameId) => await Get<GameInfo>("games", gameId.ToLower());
+
         private async Task<T> Get<T>(params string[] paths)
         {
             using var response = await _http.GetAsync(BuildUri(paths)).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                throw new BMException(error);
+                Console.WriteLine(error);
+                Console.WriteLine("\n\nPress any key to exit.");
+                Console.ReadKey();
             }
 
             var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
