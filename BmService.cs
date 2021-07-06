@@ -35,9 +35,7 @@ namespace BattlemetricsWrapper
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                Console.WriteLine(error);
-                Console.WriteLine("\n\nPress any key to exit.");
-                Console.ReadKey();
+                throw new BMException(error);
             }
 
             var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
