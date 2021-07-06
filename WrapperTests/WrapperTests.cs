@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using BattlemetricsWrapper;
 using BattlemetricsWrapper.ResponseModels;
-using BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3;
+using BattlemetricsWrapper.ResponseModels.GameInfoResponses;
 
 namespace WrapperTests
 {
@@ -26,9 +26,14 @@ namespace WrapperTests
         private async Task TestServerInfos()
         {
             var genericServerInfo = await _bmClient.GetServerInfoAsync<ServerInfo>("1833029");
-            var armaServerInfo = await _bmClient.GetServerInfoAsync<Arma3Info>("1833029");
             Console.WriteLine($"Name: {genericServerInfo.Data.Attributes.Name} | Active Players: {genericServerInfo.Data.Attributes.Players}");
-            Console.WriteLine($"Name: {armaServerInfo.Data.Attributes.Name} | Active Players: {armaServerInfo.Data.Attributes.Players} | Map: {armaServerInfo.Data.Attributes.Details.Map}");
+            
+            var arma3ServerInfo = await _bmClient.GetServerInfoAsync<Arma3Info>("1833029");
+            Console.WriteLine($"Name: {arma3ServerInfo.Data.Attributes.Name} | Active Players: {arma3ServerInfo.Data.Attributes.Players} | Map {arma3ServerInfo.Data.Attributes.Details.Map}");
+
+            var minecraftServerInfo = await _bmClient.GetServerInfoAsync<MinecraftInfo>("5873087");
+            Console.WriteLine($"Name: {minecraftServerInfo.Data.Attributes.Name} | Active PLayers: {minecraftServerInfo.Data.Attributes.Players} | Clean desc: " +
+                              $"{minecraftServerInfo.Data.Attributes.Details.MinecraftCleanDescription.Replace("\n", " ")}");
         }
     }
 }
