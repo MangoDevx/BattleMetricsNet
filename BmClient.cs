@@ -16,5 +16,7 @@ namespace BattlemetricsWrapper
         public async Task<T> GetServerInfoAsync<T>(string serverId) where T : IServerInfo => await _bmService.GetServerInfo<T>(serverId);
 
         public async Task<GameInfo> GetGameInfoAsync(string gameId) => await _bmService.GetGameInfo(gameId);
+
+        public async Task<BanInfo> GetBanInfoAsync(string banId) => await _bmService.GetBanInfo(banId);
     }
 }

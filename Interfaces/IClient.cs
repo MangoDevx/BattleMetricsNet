@@ -19,5 +19,12 @@ namespace BattlemetricsWrapper.Interfaces
         /// <param name="gameId"></param>
         /// <returns></returns>
         Task<GameInfo> GetGameInfoAsync(string gameId);
+
+        /// <summary>
+        /// Gets the specified ban information by ban Id
+        /// </summary>
+        /// <param name="banId"></param>
+        /// <returns></returns>
+        Task<BanInfo> GetBanInfoAsync(string banId);
     }
 }

@@ -31,6 +31,8 @@ namespace BattlemetricsWrapper
 
         public async Task<GameInfo> GetGameInfo(string gameId) => await Get<GameInfo>("games", gameId.ToLower());
 
+        public async Task<BanInfo> GetBanInfo(string banId) => await Get<BanInfo>("bans", banId);
+
         private async Task<T> Get<T>(params string[] paths)
         {
             using var response = await _http.GetAsync(BuildUri(paths)).ConfigureAwait(false);
@@ -56,18 +58,18 @@ namespace BattlemetricsWrapper
         private Exception ReturnException(string error)
         {
             var jObj = JObject.Parse(error);
-            
+
             var errorSpecifics = jObj["errors"]?[0];
             if (errorSpecifics is null)
                 return new BmGenericException(error);
-            
+
             var specificError = errorSpecifics["title"]?.ToString();
             var details = errorSpecifics["detail"]?.ToString();
             var status = errorSpecifics["status"]?.ToString();
 
             if (string.IsNullOrEmpty(specificError) || string.IsNullOrEmpty(details))
                 return new BmGenericException(error);
-            
+
             var exceptionMessage = !string.IsNullOrEmpty(status) ? $"Status Code: {status}. {specificError}. {details}" : $"{specificError}. {details}";
 
             if (specificError.Contains("Unauthorized"))
@@ -76,8 +78,8 @@ namespace BattlemetricsWrapper
                 return new BmInvalidServerIdException(exceptionMessage);
             if (specificError.Contains("Unknown Game"))
                 return new BmUnknownGameException(exceptionMessage);
-            
+
             return new BmGenericException(exceptionMessage);
-        } 
+        }
     }
 }

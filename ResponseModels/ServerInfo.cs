@@ -10,16 +10,10 @@ namespace BattlemetricsWrapper.ResponseModels
         /// Main game Data
         /// </summary>
         [JsonProperty("data")]
-        public Data Data { get; set; }
-
-        /// <summary>
-        /// Any additional included info by the api
-        /// </summary>
-        [JsonProperty("included")]
-        public object[] Included { get; set; }
+        public ServerInfoData Data { get; set; }
     }
 
-    public sealed class Data
+    public sealed class ServerInfoData
     {
         /// <summary>
         /// Type of info should be server for server model
@@ -37,16 +31,16 @@ namespace BattlemetricsWrapper.ResponseModels
         /// Server data attributes (server info)
         /// </summary>
         [JsonProperty("attributes")]
-        public Attributes Attributes { get; set; }
+        public ServerInfoAttributes Attributes { get; set; }
 
         /// <summary>
         /// Server data relationships (game info)
         /// </summary>
         [JsonProperty("relationships")]
-        public Relationships Relationships { get; set; }
+        public ServerInfoRelationships Relationships { get; set; }
     }
 
-    public sealed class Attributes
+    public sealed class ServerInfoAttributes
     {
         /// <summary>
         /// Same as id in Data
@@ -151,25 +145,25 @@ namespace BattlemetricsWrapper.ResponseModels
         public object[] MetaData { get; set; }
     }
 
-    public sealed class Relationships
+    public sealed class ServerInfoRelationships
     {
         /// <summary>
         /// Game class holder the server is hosting
         /// </summary>
         [JsonProperty("game")]
-        public Game Game { get; set; }
+        public ServerInfoGame Game { get; set; }
     }
 
-    public sealed class Game
+    public sealed class ServerInfoGame
     {
         /// <summary>
         /// Game data for the returned game details
         /// </summary>
         [JsonProperty("data")]
-        public GameData Data { get; set; }
+        public ServerInfoGameData Data { get; set; }
     }
 
-    public sealed class GameData
+    public sealed class ServerInfoGameData
     {
         /// <summary>
         /// The type of service the server is hosting
