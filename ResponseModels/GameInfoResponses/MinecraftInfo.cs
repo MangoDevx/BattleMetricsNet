@@ -2,15 +2,15 @@
 using BattlemetricsWrapper.Interfaces;
 using Newtonsoft.Json;
 
-namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
+namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
 {
-    public class MinecraftInfo : IServerInfo
+    public sealed class MinecraftInfo : IServerInfo
     {
         /// <summary>
         /// Main game Data
         /// </summary>
         [JsonProperty("data")]
-        public Data Data { get; set; }
+        public McData Data { get; set; }
 
         /// <summary>
         /// Any additional included info by the api
@@ -19,7 +19,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
         public object[] Included { get; set; }
     }
 
-    public class Data
+    public sealed class McData
     {
         /// <summary>
         /// Type of info should be server for server model
@@ -37,16 +37,16 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
         /// Server data attributes (server info)
         /// </summary>
         [JsonProperty("attributes")]
-        public ResponseModels.Attributes Attributes { get; set; }
+        public McAttributes Attributes { get; set; }
 
         /// <summary>
         /// Server data relationships (game info)
         /// </summary>
         [JsonProperty("relationships")]
-        public ResponseModels.Relationships Relationships { get; set; }
+        public McRelationships Relationships { get; set; }
     }
 
-    public class Attributes
+    public sealed class McAttributes
     {
         /// <summary>
         /// Same as id in Data
@@ -118,7 +118,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
         /// Ingame details
         /// </summary>
         [JsonProperty("details")]
-        public Details Details { get; set; }
+        public McDetails Details { get; set; }
 
         /// <summary>
         /// Private server indicator
@@ -157,7 +157,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
         public object[] MetaData { get; set; }
     }
 
-    public class Details
+    public sealed class McDetails
     {
         /// <summary>
         /// Cleaned minecraft server description
@@ -174,17 +174,20 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
         /// <summary>
         /// Minecraft server version
         /// </summary>
-        [JsonProperty("minecraft_version")] public MinecraftVersion MinecraftVersion { get; set; }
+        [JsonProperty("minecraft_version")]
+        public MinecraftVersion MinecraftVersion { get; set; }
 
         /// <summary>
         /// If the Minecraft server is modded
         /// </summary>
-        [JsonProperty("minecraft_modded")] public bool MinecraftModded { get; set; }
+        [JsonProperty("minecraft_modded")]
+        public bool MinecraftModded { get; set; }
 
         /// <summary>
         /// Minecraft server hash
         /// </summary>
-        [JsonProperty("minecraft_hash")] public string MinecraftHash { get; set; }
+        [JsonProperty("minecraft_hash")]
+        public string MinecraftHash { get; set; }
 
         /// <summary>
         /// Minecraft server version name
@@ -193,32 +196,32 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
         public string MinecraftVersionName { get; set; }
     }
 
-    public class MinecraftVersion
+    public sealed class MinecraftVersion
     {
         [JsonProperty("name")] public string Name { get; set; }
 
         [JsonProperty("protocol")] public long Protocol { get; set; }
     }
 
-    public class Relationships
+    public sealed class McRelationships
     {
         /// <summary>
         /// Game class holder the server is hosting
         /// </summary>
         [JsonProperty("game")]
-        public ResponseModels.Game Game { get; set; }
+        public McGame Game { get; set; }
     }
 
-    public class Game
+    public sealed class McGame
     {
         /// <summary>
         /// Game data for the returned game details
         /// </summary>
         [JsonProperty("data")]
-        public ResponseModels.GameData Data { get; set; }
+        public McGameData Data { get; set; }
     }
 
-    public class GameData
+    public sealed class McGameData
     {
         /// <summary>
         /// The type of service the server is hosting
