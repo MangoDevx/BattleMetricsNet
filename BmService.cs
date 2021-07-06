@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using BattlemetricsWrapper.Exceptions;
 using BattlemetricsWrapper.Interfaces;
 using BattlemetricsWrapper.ResponseModels;
 using Newtonsoft.Json;
@@ -35,7 +36,7 @@ namespace BattlemetricsWrapper
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                throw new BMException(error);
+                throw new BmException(error);
             }
 
             var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);

@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using BattlemetricsWrapper;
 using BattlemetricsWrapper.ResponseModels;
-using BattlemetricsWrapper.ResponseModels.GameInfoResponses;
+using BattlemetricsWrapper.ResponseModels.SpecificServerInfo;
 
 namespace WrapperTests
 {

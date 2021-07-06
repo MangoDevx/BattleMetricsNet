@@ -2,15 +2,15 @@
 using BattlemetricsWrapper.Interfaces;
 using Newtonsoft.Json;
 
-namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
+namespace BattlemetricsWrapper.ResponseModels.SpecificServerInfo
 {
-    public sealed class MinecraftInfo : IServerInfo
+    public sealed class Arma3Info : IServerInfo
     {
         /// <summary>
         /// Main game Data
         /// </summary>
         [JsonProperty("data")]
-        public McData Data { get; set; }
+        public Arma3Data Data { get; set; }
 
         /// <summary>
         /// Any additional included info by the api
@@ -19,7 +19,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         public object[] Included { get; set; }
     }
 
-    public sealed class McData
+    public sealed class Arma3Data
     {
         /// <summary>
         /// Type of info should be server for server model
@@ -37,16 +37,16 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         /// Server data attributes (server info)
         /// </summary>
         [JsonProperty("attributes")]
-        public McAttributes Attributes { get; set; }
+        public Arma3Attributes Attributes { get; set; }
 
         /// <summary>
         /// Server data relationships (game info)
         /// </summary>
         [JsonProperty("relationships")]
-        public McRelationships Relationships { get; set; }
+        public Arma3Relationships Relationships { get; set; }
     }
 
-    public sealed class McAttributes
+    public sealed class Arma3Attributes
     {
         /// <summary>
         /// Same as id in Data
@@ -118,7 +118,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         /// Ingame details
         /// </summary>
         [JsonProperty("details")]
-        public McDetails Details { get; set; }
+        public Arma3Details Details { get; set; }
 
         /// <summary>
         /// Private server indicator
@@ -157,85 +157,112 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         public object[] MetaData { get; set; }
     }
 
-    public sealed class McDetails
+    public sealed class Arma3Details
     {
         /// <summary>
-        /// Cleaned minecraft server description
+        /// The current map ingame
         /// </summary>
-        [JsonProperty("minecraft_clean_description")]
-        public string MinecraftCleanDescription { get; set; }
+        [JsonProperty("map")]
+        public string Map { get; set; }
 
         /// <summary>
-        /// Full minecraft server description
+        /// The current mission ingame
         /// </summary>
-        [JsonProperty("minecraft_description")]
-        public string MinecraftDescription { get; set; }
+        [JsonProperty("mission")]
+        public string Mission { get; set; }
 
         /// <summary>
-        /// Minecraft server version
+        /// The ingame game id
         /// </summary>
-        [JsonProperty("minecraft_version")]
-        public MinecraftVersion MinecraftVersion { get; set; }
+        [JsonProperty("gameid")]
+        public long Gameid { get; set; }
 
         /// <summary>
-        /// If the Minecraft server is modded
+        /// The game server version
         /// </summary>
-        [JsonProperty("minecraft_modded")]
-        public bool MinecraftModded { get; set; }
+        [JsonProperty("version")]
+        public string Version { get; set; }
 
         /// <summary>
-        /// Minecraft server hash
+        /// Game signatures
         /// </summary>
-        [JsonProperty("minecraft_hash")]
-        public string MinecraftHash { get; set; }
+        [JsonProperty("sigs")]
+        public string[] Sigs { get; set; }
 
         /// <summary>
-        /// Minecraft server version name
+        /// Mod names
         /// </summary>
-        [JsonProperty("minecraft_version_name")]
-        public string MinecraftVersionName { get; set; }
+        [JsonProperty("modNames")]
+        public object[] ModNames { get; set; }
+
+        /// <summary>
+        /// Mod hashes
+        /// </summary>
+        [JsonProperty("modHashes")]
+        public object[] ModHashes { get; set; }
+
+        /// <summary>
+        /// Mod ids
+        /// </summary>
+        [JsonProperty("modIds")]
+        public object[] ModIds { get; set; }
+
+        /// <summary>
+        /// Third person setting value
+        /// </summary>
+        [JsonProperty("thirdPerson")]
+        public bool ThirdPerson { get; set; }
+
+        /// <summary>
+        /// Advanced flight mode setting value
+        /// </summary>
+        [JsonProperty("advancedFlightMode")]
+        public bool AdvancedFlightMode { get; set; }
+
+        /// <summary>
+        /// AI difficulty level
+        /// </summary>
+        [JsonProperty("difficultyAI")]
+        public long DifficultyAi { get; set; }
+
+        /// <summary>
+        /// Game difficulty level
+        /// </summary>
+        [JsonProperty("difficultyLevel")]
+        public long DifficultyLevel { get; set; }
+
+        /// <summary>
+        /// Crosshairs enabled setting value
+        /// </summary>
+        [JsonProperty("crosshair")]
+        public bool Crosshair { get; set; }
+
+        /// <summary>
+        /// Server steam id
+        /// </summary>
+        [JsonProperty("serverSteamId")]
+        public string ServerSteamId { get; set; }
     }
 
-    public sealed class MinecraftVersion
-    {
-        /// <summary>
-        /// Minecraft version name
-        /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Minecraft version protocol
-        /// </summary>
-        [JsonProperty("protocol")]
-        public long Protocol { get; set; }
-    }
-
-    public sealed class McRelationships
+    public sealed class Arma3Relationships
     {
         /// <summary>
         /// Game class holder the server is hosting
         /// </summary>
         [JsonProperty("game")]
-        public McGame Game { get; set; }
-
-        /// <summary>
-        /// Contains Meta and Game data
-        /// </summary>
-        [JsonProperty("serverGroup")]
-        public McServerGroup ServerGroup { get; set; }
+        public Arma3Game Game { get; set; }
     }
 
-    public sealed class McGame
+    public sealed class Arma3Game
     {
         /// <summary>
         /// Game data for the returned game details
         /// </summary>
         [JsonProperty("data")]
-        public McGameData Data { get; set; }
+        public Arma3GameData Data { get; set; }
     }
 
-    public sealed class McGameData
+    public sealed class Arma3GameData
     {
         /// <summary>
         /// The type of service the server is hosting
@@ -248,23 +275,5 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
-    }
-
-    public class McServerGroup
-    {
-        /// <summary>
-        /// Meta information
-        /// </summary>
-        [JsonProperty("meta")]
-        public McMeta Meta { get; set; }
-    }
-
-    public class McMeta
-    {
-        /// <summary>
-        /// Leader flag
-        /// </summary>
-        [JsonProperty("leader")]
-        public bool Leader { get; set; }
     }
 }
