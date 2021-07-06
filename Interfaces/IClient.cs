@@ -10,6 +10,6 @@ namespace BattlemetricsWrapper.Interfaces
         /// </summary>
         /// <param name="serverId"></param>
         /// <returns></returns>
-        Task<ServerInfoResponse> GetServerInfoAsync(string serverId);
+        Task<TServerInfo> GetServerInfoAsync<TServerInfo>(string serverId) where TServerInfo : IServerInfo;
     }
 }

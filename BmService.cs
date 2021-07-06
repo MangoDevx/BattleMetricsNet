@@ -25,7 +25,7 @@ namespace BattlemetricsWrapper
             _serializer = new JsonSerializer();
         }
 
-        public async Task<ServerInfoResponse> GetServerInfo(string serverId) => await Get<ServerInfoResponse>("servers", serverId);
+        public async Task<T> GetServerInfo<T>(string serverId) where T : IServerInfo => await Get<T>("servers", serverId);
 
             private async Task<T> Get<T>(params string[] paths)
         {

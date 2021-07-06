@@ -15,6 +15,6 @@ namespace BattlemetricsWrapper
             _bmService = new BmService(authToken);
         }
 
-        public async Task<ServerInfoResponse> GetServerInfoAsync(string serverId) => await _bmService.GetServerInfo(serverId);
+        public async Task<T> GetServerInfoAsync<T>(string serverId) where T : IServerInfo => await _bmService.GetServerInfo<T>(serverId);
     }
 }
