@@ -2,15 +2,15 @@
 using BattlemetricsWrapper.Interfaces;
 using Newtonsoft.Json;
 
-namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
+namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
 {
-    public class Arma3Info : IServerInfo
+    public sealed class Arma3Info : IServerInfo
     {
         /// <summary>
         /// Main game Data
         /// </summary>
         [JsonProperty("data")]
-        public Data Data { get; set; }
+        public Arma3Data Data { get; set; }
 
         /// <summary>
         /// Any additional included info by the api
@@ -19,7 +19,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         public object[] Included { get; set; }
     }
 
-    public class Data
+    public sealed class Arma3Data
     {
         /// <summary>
         /// Type of info should be server for server model
@@ -37,16 +37,16 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         /// Server data attributes (server info)
         /// </summary>
         [JsonProperty("attributes")]
-        public Attributes Attributes { get; set; }
+        public Arma3Attributes Attributes { get; set; }
 
         /// <summary>
         /// Server data relationships (game info)
         /// </summary>
         [JsonProperty("relationships")]
-        public Relationships Relationships { get; set; }
+        public Arma3Relationships Relationships { get; set; }
     }
 
-    public class Attributes
+    public sealed class Arma3Attributes
     {
         /// <summary>
         /// Same as id in Data
@@ -118,7 +118,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         /// Ingame details
         /// </summary>
         [JsonProperty("details")]
-        public Details Details { get; set; }
+        public Arma3Details Details { get; set; }
 
         /// <summary>
         /// Private server indicator
@@ -157,7 +157,7 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         public object[] MetaData { get; set; }
     }
 
-    public class Details
+    public sealed class Arma3Details
     {
         /// <summary>
         /// The current map ingame
@@ -244,25 +244,25 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         public string ServerSteamId { get; set; }
     }
 
-    public class Relationships
+    public sealed class Arma3Relationships
     {
         /// <summary>
         /// Game class holder the server is hosting
         /// </summary>
         [JsonProperty("game")]
-        public Game Game { get; set; }
+        public Arma3Game Game { get; set; }
     }
 
-    public abstract class Game
+    public sealed class Arma3Game
     {
         /// <summary>
         /// Game data for the returned game details
         /// </summary>
         [JsonProperty("data")]
-        public GameData Data { get; set; }
+        public Arma3GameData Data { get; set; }
     }
 
-    public abstract class GameData
+    public sealed class Arma3GameData
     {
         /// <summary>
         /// The type of service the server is hosting
