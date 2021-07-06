@@ -3,13 +3,14 @@ using System.Configuration;
 using System.Threading.Tasks;
 using BattlemetricsWrapper;
 using BattlemetricsWrapper.ResponseModels;
-using BattlemetricsWrapper.ResponseModels.GameInfoResponses;
+using BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3;
 
 namespace WrapperTests
 {
     public class WrapperTests
     {
-        // I will be using https://www.battlemetrics.com/servers/arma3/1833029 for my tests
+        // ArmA test server: https://www.battlemetrics.com/servers/arma3/1833029
+        // Minecraft test server: https://www.battlemetrics.com/servers/minecraft/5873087
         
         private readonly BmClient _bmClient;
         public WrapperTests()

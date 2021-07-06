@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BattlemetricsWrapper.Interfaces;
-using BattlemetricsWrapper.ResponseModels;
 using Newtonsoft.Json;
 
 namespace BattlemetricsWrapper
@@ -13,21 +11,21 @@ namespace BattlemetricsWrapper
         private readonly HttpClient _http;
         private const string BaseUri = "https://api.battlemetrics.com";
         private const string AuthHeader = "Authorization";
-        private readonly string AuthKey = "Bearer ";
+        private readonly string _authKey = "Bearer ";
         private readonly JsonSerializer _serializer;
 
 
         public BmService(string authKey)
         {
             _http = new HttpClient();
-            AuthKey += authKey;
-            _http.DefaultRequestHeaders.Add(AuthHeader, AuthKey);
+            _authKey += authKey;
+            _http.DefaultRequestHeaders.Add(AuthHeader, _authKey);
             _serializer = new JsonSerializer();
         }
 
         public async Task<T> GetServerInfo<T>(string serverId) where T : IServerInfo => await Get<T>("servers", serverId);
 
-            private async Task<T> Get<T>(params string[] paths)
+        private async Task<T> Get<T>(params string[] paths)
         {
             using var response = await _http.GetAsync(BuildUri(paths)).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)

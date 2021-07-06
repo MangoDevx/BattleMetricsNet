@@ -2,9 +2,9 @@
 using BattlemetricsWrapper.Interfaces;
 using Newtonsoft.Json;
 
-namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
+namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.Minecraft
 {
-    public class Arma3Info : IServerInfo
+    public class MinecraftInfo : IServerInfo
     {
         /// <summary>
         /// Main game Data
@@ -37,13 +37,13 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         /// Server data attributes (server info)
         /// </summary>
         [JsonProperty("attributes")]
-        public Attributes Attributes { get; set; }
+        public ResponseModels.Attributes Attributes { get; set; }
 
         /// <summary>
         /// Server data relationships (game info)
         /// </summary>
         [JsonProperty("relationships")]
-        public Relationships Relationships { get; set; }
+        public ResponseModels.Relationships Relationships { get; set; }
     }
 
     public class Attributes
@@ -160,88 +160,44 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
     public class Details
     {
         /// <summary>
-        /// The current map ingame
+        /// Cleaned minecraft server description
         /// </summary>
-        [JsonProperty("map")]
-        public string Map { get; set; }
+        [JsonProperty("minecraft_clean_description")]
+        public string MinecraftCleanDescription { get; set; }
 
         /// <summary>
-        /// The current mission ingame
+        /// Full minecraft server description
         /// </summary>
-        [JsonProperty("mission")]
-        public string Mission { get; set; }
+        [JsonProperty("minecraft_description")]
+        public string MinecraftDescription { get; set; }
 
         /// <summary>
-        /// The ingame game id
+        /// Minecraft server version
         /// </summary>
-        [JsonProperty("gameid")]
-        public long Gameid { get; set; }
+        [JsonProperty("minecraft_version")] public MinecraftVersion MinecraftVersion { get; set; }
 
         /// <summary>
-        /// The game server version
+        /// If the Minecraft server is modded
         /// </summary>
-        [JsonProperty("version")]
-        public string Version { get; set; }
+        [JsonProperty("minecraft_modded")] public bool MinecraftModded { get; set; }
 
         /// <summary>
-        /// Game signatures
+        /// Minecraft server hash
         /// </summary>
-        [JsonProperty("sigs")]
-        public string[] Sigs { get; set; }
+        [JsonProperty("minecraft_hash")] public string MinecraftHash { get; set; }
 
         /// <summary>
-        /// Mod names
+        /// Minecraft server version name
         /// </summary>
-        [JsonProperty("modNames")]
-        public object[] ModNames { get; set; }
+        [JsonProperty("minecraft_version_name")]
+        public string MinecraftVersionName { get; set; }
+    }
 
-        /// <summary>
-        /// Mod hashes
-        /// </summary>
-        [JsonProperty("modHashes")]
-        public object[] ModHashes { get; set; }
+    public class MinecraftVersion
+    {
+        [JsonProperty("name")] public string Name { get; set; }
 
-        /// <summary>
-        /// Mod ids
-        /// </summary>
-        [JsonProperty("modIds")]
-        public object[] ModIds { get; set; }
-
-        /// <summary>
-        /// Third person setting value
-        /// </summary>
-        [JsonProperty("thirdPerson")]
-        public bool ThirdPerson { get; set; }
-
-        /// <summary>
-        /// Advanced flight mode setting value
-        /// </summary>
-        [JsonProperty("advancedFlightMode")]
-        public bool AdvancedFlightMode { get; set; }
-
-        /// <summary>
-        /// AI difficulty level
-        /// </summary>
-        [JsonProperty("difficultyAI")]
-        public long DifficultyAi { get; set; }
-
-        /// <summary>
-        /// Game difficulty level
-        /// </summary>
-        [JsonProperty("difficultyLevel")]
-        public long DifficultyLevel { get; set; }
-
-        /// <summary>
-        /// Crosshairs enabled setting value
-        /// </summary>
-        [JsonProperty("crosshair")]
-        public bool Crosshair { get; set; }
-
-        /// <summary>
-        /// Server steam id
-        /// </summary>
-        [JsonProperty("serverSteamId")]
-        public string ServerSteamId { get; set; }
+        [JsonProperty("protocol")] public long Protocol { get; set; }
     }
 
     public class Relationships
@@ -250,19 +206,19 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses.ArmA3
         /// Game class holder the server is hosting
         /// </summary>
         [JsonProperty("game")]
-        public Game Game { get; set; }
+        public ResponseModels.Game Game { get; set; }
     }
 
-    public abstract class Game
+    public class Game
     {
         /// <summary>
         /// Game data for the returned game details
         /// </summary>
         [JsonProperty("data")]
-        public GameData Data { get; set; }
+        public ResponseModels.GameData Data { get; set; }
     }
 
-    public abstract class GameData
+    public class GameData
     {
         /// <summary>
         /// The type of service the server is hosting

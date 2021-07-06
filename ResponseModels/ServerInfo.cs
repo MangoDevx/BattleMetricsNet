@@ -169,7 +169,7 @@ namespace BattlemetricsWrapper.ResponseModels
         public GameData Data { get; set; }
     }
 
-    public class GameData
+    public abstract class GameData
     {
         /// <summary>
         /// The type of service the server is hosting
