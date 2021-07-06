@@ -22,7 +22,11 @@ namespace WrapperTests
         {
             await TestServerInfos();
             Console.WriteLine("\n");
+            
             await TestGameInfo();
+            Console.WriteLine("\n");
+            
+            // await TestBanInfo(); I cannot personally test this as my token does not have ban:read scope
         }
         
         private async Task TestServerInfos()
@@ -51,6 +55,12 @@ namespace WrapperTests
             var arkGameInfo = await _bmClient.GetGameInfoAsync("ark");
             Console.WriteLine($"Name: {arkGameInfo.Data.Attributes.Name} | Max players 24H: {arkGameInfo.Data.Attributes.MaxPlayers24H} | " +
                               $"Players online currently in the USA: {arkGameInfo.Data.Attributes.PlayersByCountry.Us}");
+        }
+
+        private async Task TestBanInfo()
+        {
+            var banInfo = await _bmClient.GetBanInfoAsync("1");
+            Console.WriteLine($"Name: {banInfo.Data.Meta.Player} | Reason: {banInfo.Data.Attributes.Reason}");
         }
     }
 }

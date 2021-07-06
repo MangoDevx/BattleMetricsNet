@@ -67,7 +67,7 @@ namespace BattlemetricsWrapper
             var details = errorSpecifics["detail"]?.ToString();
             var status = errorSpecifics["status"]?.ToString();
 
-            if (string.IsNullOrEmpty(specificError) || string.IsNullOrEmpty(details))
+            if (string.IsNullOrEmpty(specificError))
                 return new BmGenericException(error);
 
             var exceptionMessage = !string.IsNullOrEmpty(status) ? $"Status Code: {status}. {specificError}. {details}" : $"{specificError}. {details}";
@@ -78,6 +78,8 @@ namespace BattlemetricsWrapper
                 return new BmInvalidServerIdException(exceptionMessage);
             if (specificError.Contains("Unknown Game"))
                 return new BmUnknownGameException(exceptionMessage);
+            if (specificError.Contains("Invalid ban") || specificError.Contains("No ban"))
+                return new BmInvalidBanIdException(exceptionMessage);
 
             return new BmGenericException(exceptionMessage);
         }
