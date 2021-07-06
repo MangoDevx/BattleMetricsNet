@@ -198,9 +198,17 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
 
     public sealed class MinecraftVersion
     {
-        [JsonProperty("name")] public string Name { get; set; }
+        /// <summary>
+        /// Minecraft version name
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        [JsonProperty("protocol")] public long Protocol { get; set; }
+        /// <summary>
+        /// Minecraft version protocol
+        /// </summary>
+        [JsonProperty("protocol")]
+        public long Protocol { get; set; }
     }
 
     public sealed class McRelationships
@@ -210,6 +218,12 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         /// </summary>
         [JsonProperty("game")]
         public McGame Game { get; set; }
+
+        /// <summary>
+        /// Contains Meta and Game data
+        /// </summary>
+        [JsonProperty("serverGroup")]
+        public McServerGroup ServerGroup { get; set; }
     }
 
     public sealed class McGame
@@ -234,5 +248,23 @@ namespace BattlemetricsWrapper.ResponseModels.GameInfoResponses
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+    }
+
+    public class McServerGroup
+    {
+        /// <summary>
+        /// Meta information
+        /// </summary>
+        [JsonProperty("meta")]
+        public McMeta Meta { get; set; }
+    }
+
+    public class McMeta
+    {
+        /// <summary>
+        /// Leader flag
+        /// </summary>
+        [JsonProperty("leader")]
+        public bool Leader { get; set; }
     }
 }
