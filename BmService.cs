@@ -6,6 +6,7 @@ using BattlemetricsWrapper.Exceptions;
 using BattlemetricsWrapper.Interfaces;
 using BattlemetricsWrapper.ResponseModels;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BattlemetricsWrapper
 {
@@ -36,7 +37,7 @@ namespace BattlemetricsWrapper
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                throw new BmException(error);
+                throw ReturnException(error);
             }
 
             var content = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -51,5 +52,32 @@ namespace BattlemetricsWrapper
             using var jsonReader = new JsonTextReader(reader);
             return _serializer.Deserialize<T>(jsonReader);
         }
+
+        private Exception ReturnException(string error)
+        {
+            var jObj = JObject.Parse(error);
+            
+            var errorSpecifics = jObj["errors"]?[0];
+            if (errorSpecifics is null)
+                return new BmGenericException(error);
+            
+            var specificError = errorSpecifics["title"]?.ToString();
+            var details = errorSpecifics["detail"]?.ToString();
+            var status = errorSpecifics["status"]?.ToString();
+
+            if (string.IsNullOrEmpty(specificError) || string.IsNullOrEmpty(details))
+                return new BmGenericException(error);
+            
+            var exceptionMessage = !string.IsNullOrEmpty(status) ? $"Status Code: {status}. {specificError}. {details}" : $"{specificError}. {details}";
+
+            if (specificError.Contains("Unauthorized"))
+                return new BmUnauthorizedException(exceptionMessage);
+            if (specificError.Contains("Invalid Server"))
+                return new BmInvalidServerIdException(exceptionMessage);
+            if (specificError.Contains("Unknown Game"))
+                return new BmUnknownGameException(exceptionMessage);
+            
+            return new BmGenericException(exceptionMessage);
+        } 
     }
 }
