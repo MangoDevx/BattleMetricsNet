@@ -5,11 +5,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="WrapperTests\**" />
+      <EmbeddedResource Remove="WrapperTests\**" />
+      <None Remove="WrapperTests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Folder Include="RequestModels" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
     </ItemGroup>
 
 </Project>

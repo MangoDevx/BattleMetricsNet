@@ -1,12 +1,13 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 
 namespace WrapperTests
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            await new WrapperTests().BeginTests();
+            await Task.Delay(-1);
         }
     }
 }

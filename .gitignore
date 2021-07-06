@@ -7,3 +7,4 @@ riderModule.iml
 .vs/
 BattleMetricsNetTest/App.config
 WrapperTest/App.config
+WrapperTests/App.config
