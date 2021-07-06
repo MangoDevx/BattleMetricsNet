@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace BattlemetricsWrapper.ResponseModels
 {
-    public class ServerInfo : IServerInfo
+    public sealed class ServerInfo : IServerInfo
     {
         /// <summary>
         /// Main game Data
@@ -19,7 +19,7 @@ namespace BattlemetricsWrapper.ResponseModels
         public object[] Included { get; set; }
     }
 
-    public class Data
+    public sealed class Data
     {
         /// <summary>
         /// Type of info should be server for server model
@@ -46,7 +46,7 @@ namespace BattlemetricsWrapper.ResponseModels
         public Relationships Relationships { get; set; }
     }
 
-    public class Attributes
+    public sealed class Attributes
     {
         /// <summary>
         /// Same as id in Data
@@ -151,7 +151,7 @@ namespace BattlemetricsWrapper.ResponseModels
         public object[] MetaData { get; set; }
     }
 
-    public class Relationships
+    public sealed class Relationships
     {
         /// <summary>
         /// Game class holder the server is hosting
@@ -160,7 +160,7 @@ namespace BattlemetricsWrapper.ResponseModels
         public Game Game { get; set; }
     }
 
-    public class Game
+    public sealed class Game
     {
         /// <summary>
         /// Game data for the returned game details
@@ -169,7 +169,7 @@ namespace BattlemetricsWrapper.ResponseModels
         public GameData Data { get; set; }
     }
 
-    public abstract class GameData
+    public sealed class GameData
     {
         /// <summary>
         /// The type of service the server is hosting
