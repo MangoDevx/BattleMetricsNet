@@ -8,3 +8,4 @@ riderModule.iml
 BattleMetricsNetTest/App.config
 WrapperTest/App.config
 WrapperTests/App.config
+nuget.config
